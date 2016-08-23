@@ -13,6 +13,7 @@
 		96B9210F1D6AE337006BFD50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B9210D1D6AE337006BFD50 /* Main.storyboard */; };
 		96B921111D6AE337006BFD50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96B921101D6AE337006BFD50 /* Assets.xcassets */; };
 		96B921141D6AE337006BFD50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B921121D6AE337006BFD50 /* LaunchScreen.storyboard */; };
+		96B9211D1D6B0685006BFD50 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9211C1D6B0684006BFD50 /* Student.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		96B921101D6AE337006BFD50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96B921131D6AE337006BFD50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96B921151D6AE337006BFD50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96B9211B1D6B0684006BFD50 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		96B9211C1D6B0684006BFD50 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,8 @@
 				96B921121D6AE337006BFD50 /* LaunchScreen.storyboard */,
 				96B921151D6AE337006BFD50 /* Info.plist */,
 				96B921041D6AE337006BFD50 /* Supporting Files */,
+				96B9211B1D6B0684006BFD50 /* Student.h */,
+				96B9211C1D6B0684006BFD50 /* Student.m */,
 			);
 			path = DateAndTime;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 				96B9210C1D6AE337006BFD50 /* ViewController.m in Sources */,
 				96B921091D6AE337006BFD50 /* AppDelegate.m in Sources */,
 				96B921061D6AE337006BFD50 /* main.m in Sources */,
+				96B9211D1D6B0685006BFD50 /* Student.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

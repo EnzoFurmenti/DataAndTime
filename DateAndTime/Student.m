@@ -33,6 +33,32 @@ static NSString *firstNames[] = {
 };
 static int firstNameCount = 21;
 
+static NSString *lastNames[] = {
+    @"Шуткевич",
+    @"Робинович",
+    @"Тореро",
+    @"Айбу",
+    @"Хосе",
+    @"Каншау",
+    @"Франсуа",
+    @"Тойбухаа",
+    @"Качаа",
+    @"Зиа",
+    @"Хожулаа",
+    @"Дурново",
+    @"Дубяго",
+    @"Черных",
+    @"Сухих",
+    @"Чутких",
+    @"Белаго",
+    @"Хитрово",
+    @"Бегун",
+    @"Мельник",
+    @"Шевченко"
+};
+static int lastNameCount = 21;
+
+
 
 @implementation Student
 
@@ -43,6 +69,7 @@ static int firstNameCount = 21;
     if(self)
     {
         self.firstName = firstNames[arc4random() % firstNameCount];
+        self.lastName = lastNames[arc4random() % lastNameCount];
         self.dateOfBirth = [self dateOfBirthOfSFromAge:fromAge toAge:toAge];
     }
     return self;
@@ -90,9 +117,10 @@ static int firstNameCount = 21;
 -(void)printDateFormatterOfDate:(NSDate*)date{
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"dd MMMM YYYY GGGG EEEE  'in' HH:mm:ss:SSS"];
-    NSLog(@"\nStudent %@ was born %@. His is %ld",self.firstName,[dateFormatter stringFromDate:date],self.age);
+    NSLog(@" Student %@ %@ was born %@. His is %ld",self.firstName,self.lastName,[dateFormatter stringFromDate:date],self.age);
 }
 
+#pragma mark -lazy initialization-
 - (NSInteger)age{
     if(!_age)
     {

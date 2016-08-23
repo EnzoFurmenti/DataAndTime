@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "Student.h"
 
+typedef  NSComparisonResult(^ComparisonResultBlock)(id _Nonnull obj1 , id _Nonnull obj2);
 @interface AppDelegate ()
 
 @property (strong, nonatomic) NSMutableArray *mArrayStudents;
@@ -39,6 +40,13 @@
     for (Student *currentStudentObj in self.mArrayStudents) {
         [currentStudentObj printDateFormatterOfDate:currentStudentObj.dateOfBirth];
     }
+
+    NSLog(@"\nSorted Array by Students");
+    NSArray *sortedArrayStudents = [self sortedArrayOfArrayStudent:self.mArrayStudents];
+    for (Student *currentSortedStudentObj in sortedArrayStudents)
+    {
+        [currentSortedStudentObj printDateFormatterOfDate:currentSortedStudentObj.dateOfBirth];
+    }
     // Override point for customization after application launch.
     return YES;
 }
@@ -52,6 +60,30 @@
     }
     
     return _mArrayStudents;
+}
+
+#pragma mark -metods-
+
+-(NSArray*)sortedArrayOfArrayStudent:(NSArray*)arrayStudent{
+   return [arrayStudent sortedArrayUsingComparator:^NSComparisonResult(id _Nonnull obj1 , id _Nonnull obj2){
+        Student *studentObj1;
+        Student *studentObj2;
+        NSDate *dateStudentObj1;
+        NSDate *dateStudentObj2;
+       
+        if([obj1 isKindOfClass:[Student class]])
+        {
+            studentObj1 = (Student*)obj1;
+            dateStudentObj1 = studentObj1.dateOfBirth;
+        }
+        if([obj2 isKindOfClass:[Student class]])
+        {
+            studentObj2 = (Student*)obj2;
+            dateStudentObj2 = studentObj2.dateOfBirth;
+        }
+        NSComparisonResult comparisonResult = [dateStudentObj2 compare:dateStudentObj1];
+        return comparisonResult;
+    }];
 }
 
 

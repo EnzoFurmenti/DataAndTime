@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSDate *dateOfBirth;
 @property (assign, nonatomic) NSInteger age;
 @property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
 
 
 -(instancetype)initWithDateOfBirthOfFromAge:(NSInteger)fromAge toAge:(NSInteger)toAge;

@@ -70,14 +70,14 @@ static int lastNameCount = 21;
     {
         self.firstName = firstNames[arc4random() % firstNameCount];
         self.lastName = lastNames[arc4random() % lastNameCount];
-        self.dateOfBirth = [self dateOfBirthOfSFromAge:fromAge toAge:toAge];
+        self.dateOfBirth = [self dateOfBirthFromAge:fromAge toAge:toAge];
     }
     return self;
 }
 
 #pragma mark -metods-
 
-- (NSDate*)dateOfBirthOfSFromAge:(NSInteger)fromAge toAge:(NSInteger)toAge{
+- (NSDate*)dateOfBirthFromAge:(NSInteger)fromAge toAge:(NSInteger)toAge{
     NSDate *currentdDate = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *allCurrentDateComponents = [calendar components:  NSCalendarUnitEra   |

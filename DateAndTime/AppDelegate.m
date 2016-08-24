@@ -14,7 +14,8 @@ typedef  NSComparisonResult(^ComparisonResultBlock)(id _Nonnull obj1 , id _Nonnu
 @interface AppDelegate ()
 
 @property (strong, nonatomic) NSMutableArray *mArrayStudents;
-
+@property (strong, nonatomic) NSDate *fastDate;
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation AppDelegate
@@ -47,6 +48,14 @@ typedef  NSComparisonResult(^ComparisonResultBlock)(id _Nonnull obj1 , id _Nonnu
     {
         [currentSortedStudentObj printDateFormatterOfDate:currentSortedStudentObj.dateOfBirth];
     }
+    
+    
+    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:.5f target:self selector:@selector(birthdayGreetingsInFastCalendar:) userInfo:nil repeats:YES];
+    self.timer = timer;
+    
+    Student *yangetStudent = [sortedArrayStudents objectAtIndex:0];
+    Student *oldestStudent = [sortedArrayStudents objectAtIndex:[sortedArrayStudents count] -1];
+    NSLog(@"%@",[self differenBetweenYangestStudent:yangetStudent andOldestStudent:oldestStudent]);
     // Override point for customization after application launch.
     return YES;
 }
@@ -86,5 +95,56 @@ typedef  NSComparisonResult(^ComparisonResultBlock)(id _Nonnull obj1 , id _Nonnu
     }];
 }
 
+-(void)birthdayGreetingsInFastCalendar:(NSTimer*)timer{
+    NSTimeInterval secondsPerDay = (NSTimeInterval)24*60*60;
+    self.fastDate = [NSDate dateWithTimeInterval:secondsPerDay sinceDate:self.fastDate];
+    NSDate *currentFastDate = [self monthAndDayOfDate:self.fastDate];
+    
+    for (Student *currentStudentObj in self.mArrayStudents) {
+          NSDate *currentStudentDateOfBirth = [self monthAndDayOfDate:currentStudentObj.dateOfBirth];
+        if([currentFastDate isEqualToDate:currentStudentDateOfBirth])
+        {
+            NSLog(@"Happy BirthDay student %@ %@",currentStudentObj.firstName,currentStudentObj.lastName);
+        }
+    }
+}
+
+- (NSDate*)monthAndDayOfDate:(NSDate*)date{
+    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+    NSDateComponents *fastDateComponents = [currentCalendar components: NSCalendarUnitMonth |
+                                            NSCalendarUnitDay
+                                                              fromDate:date];
+    [fastDateComponents setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    return [currentCalendar dateFromComponents:fastDateComponents];
+}
+
+-(NSString*)differenBetweenYangestStudent:(Student*)yangestStudent andOldestStudent:(Student*)oldestStudent{
+    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+    NSDateComponents *differentComponents = [currentCalendar components:NSCalendarUnitYear         |
+                                                                        NSCalendarUnitMonth        |
+                                                                        NSCalendarUnitWeekOfMonth  |
+                                                                        NSCalendarUnitDay
+                                                        fromDate:oldestStudent.dateOfBirth toDate: yangestStudent.dateOfBirth
+                                                         options:NSCalendarWrapComponents];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd MMMM YYYY 'by year'"];
+    NSLog(@"\nYangest student %@ %@, which he was born %@ yanger then,"
+          "\noldest student %@ %@, which he was born %@"
+          "\non %lu years %lu months %lu weeks %lu days",
+          yangestStudent.firstName,yangestStudent.lastName,[formatter stringFromDate:yangestStudent.dateOfBirth],
+          oldestStudent.firstName,oldestStudent.lastName,[formatter stringFromDate:oldestStudent.dateOfBirth],
+          [differentComponents year],[differentComponents month],[differentComponents weekOfMonth],[differentComponents day]);
+    
+    return nil;
+}
+
+#pragma mark -initialization-
+-(NSDate*)fastDate{
+    if(!_fastDate)
+    {
+        _fastDate = [NSDate date];
+    }
+    return _fastDate;
+}
 
 @end
